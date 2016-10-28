@@ -29,6 +29,8 @@ fun longitud :: "'a list \<Rightarrow> nat" where
    
 value "longitud [4,2,5] = 3"
 
+(*TODO: Resolver por otros metodos, por ejemplo, iterando y recursion no final*)
+
 text {* --------------------------------------------------------------- 
   Ejercicio 2. Definir la función
      fun intercambia :: 'a \<times> 'b \<Rightarrow> 'b \<times> 'a
