@@ -12,9 +12,10 @@ text {* ----------------------------------------------------------------
   ------------------------------------------------------------------- *}
  
 fun factorial :: "nat \<Rightarrow> nat" where
-  "factorial n = undefined"
+  "factorial 0 = 1"
+| "factorial (Suc n) = (Suc n) * factorial n"
  
-value "factorial 4" -- "24"
+value "factorial 4 = 24"
 
 text {* ----------------------------------------------------------------
   Ejercicio 1. Definir, por recursión, la función
