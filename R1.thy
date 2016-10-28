@@ -25,9 +25,9 @@ text {* ----------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 fun longitud :: "'a list \<Rightarrow> nat" where
-  "longitud xs = undefined"
+  "longitud xs = length (xs)"
    
-value "longitud [4,2,5]" -- "= 3"
+value "longitud [4,2,5] = 3"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 2. Definir la función
