@@ -26,8 +26,14 @@ text {* ----------------------------------------------------------------
 
 fun longitud :: "'a list \<Rightarrow> nat" where
   "longitud xs = length (xs)"
+
+value "longitud [4,2,5] = 3" 
+
+fun longitud2 :: "'a list \<Rightarrow> nat" where
+  "longitud2 [] = 0"
+| "longitud2 (x # xs) = 1 + longitud2 xs "
    
-value "longitud [4,2,5] = 3"
+value "longitud2 [4,2,5] = 3"
 
 (*TODO: Resolver por otros metodos, por ejemplo, iterando y recursion no final*)
 
