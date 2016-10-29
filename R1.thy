@@ -46,9 +46,9 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun intercambia :: "'a \<times> 'b \<Rightarrow> 'b \<times> 'a" where
-  "intercambia (x,y) = undefined"
+  "intercambia (x,y) = (y,x)"
 
-value "intercambia (u,v)" -- "= (v,u)"
+value "intercambia (u,v) = (v,u)"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 3. Definir, por recursión, la función
