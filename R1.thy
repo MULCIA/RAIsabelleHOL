@@ -59,9 +59,10 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun inversa :: "'a list \<Rightarrow> 'a list" where
-  "inversa xs = undefined"
+  "inversa [] = []" 
+|  "inversa xs = (last xs)#inversa(butlast(xs))"
 
-value "inversa [a,d,c]" -- "= [c,d,a]"
+value "inversa [a,d,c] = [c,d,a]"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 4. Definir la función
