@@ -73,9 +73,15 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun repite :: "nat \<Rightarrow> 'a \<Rightarrow> 'a list" where
-  "repite n x = undefined"
+  "repite n x = replicate n x"
 
-value "repite 3 a" -- "= [a,a,a]"
+value "repite 3 a = [a,a,a]"
+
+(* TODO: hacerlo de otra forma *)
+fun repite2 :: "nat \<Rightarrow> 'a \<Rightarrow> 'a list" where
+  "repite2 n x = replicate n x"
+
+value "repite 3 a = [a,a,a]"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 5. Definir la función
