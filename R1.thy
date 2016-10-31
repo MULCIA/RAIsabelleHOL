@@ -119,9 +119,10 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun elimina :: "nat \<Rightarrow> 'a list \<Rightarrow> 'a list" where
-  "elimina n xs = undefined"
+  "elimina 0 xs = xs"
+| "elimina n xs = elimina((n-1)(tl xs))"
 
-value "elimina 2 [a,c,d,b,e]" -- "= [d,b,e]"
+value "elimina 2 [a,c,d,b,e] = [d,b,e]"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 8. Definir la función
