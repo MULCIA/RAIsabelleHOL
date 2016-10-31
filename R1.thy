@@ -105,9 +105,10 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun coge :: "nat \<Rightarrow> 'a list \<Rightarrow> 'a list" where
-  "coge n xs = undefined"
+  "coge 0 xs = []"
+|  "coge n xs = [(hd xs)]@(coge (n-1) (tl xs))"
 
-value "coge 2 [a,c,d,b,e]" -- "= [a,c]"
+value "coge 2 [a,c,d,b,e] = [a,c]"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 7. Definir la función
