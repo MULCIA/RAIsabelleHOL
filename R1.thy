@@ -120,7 +120,7 @@ text {* ---------------------------------------------------------------
 
 fun elimina :: "nat \<Rightarrow> 'a list \<Rightarrow> 'a list" where
   "elimina 0 xs = xs"
-| "elimina n xs = elimina((n-1)(tl xs))"
+| "elimina n xs = elimina (n-1) (tl xs)"
 
 value "elimina 2 [a,c,d,b,e] = [d,b,e]"
 
@@ -133,10 +133,10 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun esVacia :: "'a list \<Rightarrow> bool" where
-  "esVacia xs = undefined"
+  "esVacia xs = (length(xs)=0)"
 
-value "esVacia []"  -- "= True"
-value "esVacia [1]" -- "= False"
+value "esVacia [] = True"
+value "esVacia [1] = False"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 9. Definir la función
