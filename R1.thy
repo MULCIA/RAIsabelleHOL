@@ -92,9 +92,9 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun conc :: "'a list \<Rightarrow> 'a list \<Rightarrow> 'a list" where
-  "conc xs ys = undefined"
+  "conc xs ys = xs@ys"
 
-value "conc [a,d] [b,d,a,c]" -- "= [a,d,b,d,a,c]"
+value "conc [a,d] [b,d,a,c] = [a,d,b,d,a,c]"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 6. Definir la función
