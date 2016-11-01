@@ -147,12 +147,13 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun inversaAcAux :: "'a list \<Rightarrow> 'a list \<Rightarrow> 'a list" where
-  "inversaAcAux xs ys = undefined"
+  "inversaAcAux [] ys = ys"
+| "inversaAcAux xs ys = inversaAcAux (tl xs) (hd xs#ys) "
 
 fun inversaAc :: "'a list \<Rightarrow> 'a list" where
-  "inversaAc xs = undefined"
+  "inversaAc xs = inversaAcAux xs []"
 
-value "inversaAc [a,c,b,e]" -- "= [e,b,c,a]"
+value "inversaAc [a,c,b,e] = [e,b,c,a]"
 
 text {* --------------------------------------------------------------- 
   Ejercicio 10. Definir la función
