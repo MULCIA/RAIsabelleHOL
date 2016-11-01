@@ -177,8 +177,9 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun map :: "('a \<Rightarrow> 'b) \<Rightarrow> 'a list \<Rightarrow> 'b list" where
-  "map f xs = undefined"
+  "map f [] = []" 
+| "map f xs = f(hd xs)#map f (tl xs)"
 
-value "map (\<lambda>x. 2*x) [3::nat,2,5]" -- "= [6,4,10]"
+value "map (\<lambda>x. 2*x) [3::nat,2,5] = [6,4,10]"
 
 end
