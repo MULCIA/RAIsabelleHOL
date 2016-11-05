@@ -62,7 +62,8 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun copia :: "nat \<Rightarrow> 'a \<Rightarrow> 'a list" where
-  "copia n x = undefined"
+  "copia 0 x = []"
+| "copia n x = [x] @ copia (n-1) x"
 
 value "copia 3 x = [x,x,x]"
 
@@ -77,7 +78,8 @@ text {* ---------------------------------------------------------------
   ----------------------------------------------------------------- *}
 
 fun todos :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> bool" where
-  "todos p xs = undefined"
+  "todos p [] = True"
+| "todos p (x#xs) = (p x \<and> todos p xs)"
 
 value "todos (\<lambda>x. x>(1::nat)) [2,6,4] = True"
 value "todos (\<lambda>x. x>(2::nat)) [2,6,4] = False"
@@ -88,7 +90,7 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 lemma "todos (\<lambda>y. y=x) (copia n x)"
-oops
+by (induct n) auto
 
 text {* --------------------------------------------------------------- 
   Ejercicio 4.1. Definir, recursivamente y sin usar (@), la función
