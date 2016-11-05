@@ -101,7 +101,8 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun amplia :: "'a list \<Rightarrow> 'a \<Rightarrow> 'a list" where
-  "amplia xs y = undefined"
+  "amplia [] y = [y]"
+| "amplia (x#xs) y = x # amplia xs y"
 
 value "amplia [d,a] t = [d,a,t]"
 
@@ -111,6 +112,8 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 lemma "amplia xs y = xs @ [y]"
-oops
+apply (induct xs)
+apply auto
+done
 
 end
