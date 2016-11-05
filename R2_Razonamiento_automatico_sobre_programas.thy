@@ -15,7 +15,8 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun sumaImpares :: "nat \<Rightarrow> nat" where
-  "sumaImpares n = undefined"
+  "sumaImpares 0 = 0"
+| "sumaImpares n = ((n*2)-1) + sumaImpares(n-1)"
 
 value "sumaImpares 5 = 25"
 
@@ -25,7 +26,9 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 lemma "sumaImpares n = n*n"
-oops
+apply (induct n)
+apply auto
+done
 
 text {* --------------------------------------------------------------- 
   Ejercicio 2.1. Definir la función
