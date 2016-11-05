@@ -40,7 +40,8 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 fun sumaPotenciasDeDosMasUno :: "nat \<Rightarrow> nat" where
-  "sumaPotenciasDeDosMasUno n = undefined"
+  "sumaPotenciasDeDosMasUno 0 = 2"
+| "sumaPotenciasDeDosMasUno n = 2^n + sumaPotenciasDeDosMasUno(n-1)"
 
 value "sumaPotenciasDeDosMasUno 3 = 16"
 
