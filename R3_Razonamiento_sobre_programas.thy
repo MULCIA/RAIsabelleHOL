@@ -23,7 +23,16 @@ text {* ---------------------------------------------------------------
 
 -- "La demostración detallada es"
 lemma "sumaImpares n = n*n"
-oops
+proof (induct n)
+  show "sumaImpares 0 = 0 * 0" by simp
+next
+  fix n
+  assume HI: "sumaImpares n = n * n"
+  have "sumaImpares (Suc n) = sumaImpares n + (2*n+1)" by simp
+  also have "... = n*n + (2*n+1)" using HI by simp
+  also have "... = Suc n * Suc n" by simp
+  finally show "sumaImpares (Suc n) = Suc n * Suc n" by simp
+qed
 
 text {* --------------------------------------------------------------- 
   Ejercicio 2.1. Definir la función
