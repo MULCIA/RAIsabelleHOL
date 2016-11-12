@@ -96,7 +96,16 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 lemma "todos (\<lambda>y. y=x) (copia n x)"
-oops
+proof (induct n)
+  show "todos (\<lambda>y. y=x) (copia 0 x)" by simp
+next
+  fix n
+  assume HI: "todos (\<lambda>y. y=x) (copia n x)"
+  have "todos (\<lambda>y. y=x) (copia (Suc n) x) = todos (\<lambda>y. y=x) (x # (copia n x))" by simp
+  also have "... = ((x = x) \<and> (todos (\<lambda>y. y = x) (copia n x)))" by simp
+  also have "... = True" using HI by simp
+  finally show "todos (\<lambda>y. y = x) (copia (Suc n) x)" by simp
+qed
 
 text {* --------------------------------------------------------------- 
   Ejercicio 4.1. Definir la función
