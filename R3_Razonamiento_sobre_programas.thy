@@ -54,7 +54,16 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 lemma "sumaPotenciasDeDosMasUno n = 2^(n+1)"
-oops
+proof (induct n)
+  show "sumaPotenciasDeDosMasUno 0 = 2^(0 + 1)" by simp
+next
+  fix n
+  assume HI: "sumaPotenciasDeDosMasUno n = 2^(n + 1)"
+  have "sumaPotenciasDeDosMasUno (Suc n) = sumaPotenciasDeDosMasUno n + 2^(n + 1)" by simp
+  also have "... = 2 ^ (n + 1) + 2 ^ (n + 1)" using HI by simp
+  also have "... = 2 ^ ((Suc n) + 1)" by simp
+  finally show "sumaPotenciasDeDosMasUno (Suc n) = 2 ^ (Suc n + 1)" by simp
+qed
 
 text {* --------------------------------------------------------------- 
   Ejercicio 3.1. Definir la función
