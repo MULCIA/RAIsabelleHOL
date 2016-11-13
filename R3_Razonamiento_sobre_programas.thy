@@ -143,7 +143,16 @@ fun factI :: "nat \<Rightarrow> nat" where
   "factI n = factI' n 1"
 
 lemma fact: "factI' n x = x * factR n"
-oops
+proof (induct n)
+  show "factI' 0 x = x * factR 0" by simp
+next
+  fix n
+  assume H1 :  "factI' n x = x * factR n"
+  have  "factI' (Suc n) x =  factI' n (x * Suc n)" by (simp only:factI'.simps(2))
+  also have "... = (x * Suc n) * factR n" using H1 by simp
+  also have "... = x * factR (Suc n)" by (simp del: mult_Suc)
+  finally show "factI' (Suc n) x = x * factR (Suc n)" by simp
+qed
 
 text {* --------------------------------------------------------------- 
   Ejercicio 4.3. Escribir la demostración detallada de
@@ -151,7 +160,11 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 corollary "factI n = factR n"
-oops
+proof -
+  have "factI n = factI' n 1" by simp
+  also have "... = 1 * factR n" by (simp add: fact)
+  finally show "factI n = factR n" by simp
+qed
 
 text {* --------------------------------------------------------------- 
   Ejercicio 5.1. Definir, recursivamente y sin usar (@), la función
@@ -171,6 +184,15 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------- *}
 
 lemma "amplia xs y = xs @ [y]"
-oops
+proof (induct xs)
+  show "amplia [] y = [] @ [y]" by simp
+next
+  fix x xs
+  assume HI: "amplia xs y = xs @ [y]"
+  have "amplia (x # xs) y = x # (amplia xs y)" by simp
+  also have "... = x # (xs @ [y])" using HI by simp
+  also have "... = (x # xs) @ [y]" by simp
+  finally show "amplia (x # xs) y = (x # xs) @ [y]" by simp
+qed
 
 end
