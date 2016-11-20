@@ -103,8 +103,12 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-lemma "todos P (rev xs) = todos P xs"
-oops
+lemma "todos P (rev xs) = todos P xs" 
+apply (induct xs)
+apply simp
+apply (simp add: todos_append)
+apply auto
+done
 
 text {*
   --------------------------------------------------------------------- 
