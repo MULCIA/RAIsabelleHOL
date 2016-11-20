@@ -35,7 +35,8 @@ text {*
 *}
 
 fun algunos  :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> bool" where
-  "algunos p xs = undefined"
+  "algunos p [] = False"
+| "algunos p (x#xs) = (p x \<or> algunos p xs)
 
 text {*
   --------------------------------------------------------------------- 
