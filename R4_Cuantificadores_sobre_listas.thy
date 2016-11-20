@@ -18,7 +18,8 @@ text {*
 *}
 
 fun todos :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> bool" where
-  "todos p xs = undefined"
+  "todos p [] = True"
+| "todos p (x#xs) = (p x \<and> todos p xs)"
 
 text {* 
   --------------------------------------------------------------------- 
