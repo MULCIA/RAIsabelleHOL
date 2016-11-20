@@ -1,7 +1,7 @@
 chapter {* R4: Cuantificadores sobre listas *}
 
 theory R4_Cuantificadores_sobre_listas
-imports Main 
+imports Main
 begin
 
 text {* 
@@ -34,9 +34,9 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-fun algunos  :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> bool" where
+fun algunos :: "('a \<Rightarrow> bool) \<Rightarrow> 'a list \<Rightarrow> bool" where
   "algunos p [] = False"
-| "algunos p (x#xs) = (p x \<or> algunos p xs)
+| "algunos p (x#xs) = (algunos p x \<or> algunos p xs)"
 
 text {*
   --------------------------------------------------------------------- 
@@ -46,7 +46,7 @@ text {*
 *}
 
 lemma "todos (\<lambda>x. P x \<and> Q x) xs = (todos P xs \<and> todos Q xs)"
-oops
+by (induct xs) auto
 
 text {*
   --------------------------------------------------------------------- 
@@ -55,8 +55,18 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
+
 lemma "todos (\<lambda>x. P x \<and> Q x) xs = (todos P xs \<and> todos Q xs)"
-oops
+proof (induct xs)
+  show "todos (\<lambda>x. P x \<and> Q x) [] = (todos P [] \<and> todos Q [])" by simp
+next
+  fix a xs
+  assume HI: "todos (\<lambda>x. P x \<and> Q x) xs = (todos P xs \<and> todos Q xs)" 
+  have "todos (\<lambda>x. P x \<and> Q x) (a # xs) =  ((P a \<and> Q a) \<and> (todos P xs \<and> todos Q xs))" using HI by simp
+  also have "... = ((P a \<and> todos P xs) \<and> (Q a \<and> todos Q xs))" by blast
+  also have "... = (todos P (a#xs) \<and> todos Q (a#xs)) " by simp
+ finally show "todos (\<lambda>x. P x \<and> Q x) (a#xs) = (todos P (a#xs) \<and> todos Q (a#xs))" by simp 
+qed
 
 text {*
   --------------------------------------------------------------------- 
@@ -66,7 +76,7 @@ text {*
 *}
 
 lemma "todos P (x @ y) = (todos P x \<and> todos P y)"
-oops
+by (induct x) auto
 
 text {*
   --------------------------------------------------------------------- 
