@@ -85,9 +85,16 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-lemma todos_append:
-  "todos P (x @ y) = (todos P x \<and> todos P y)"
-oops
+lemma todos_append: "todos P (x @ y) = (todos P x \<and> todos P y)"
+proof (induct x)
+  show "todos P ([] @ y) = (todos P [] \<and> todos P y)" by simp
+next 
+  fix a x
+  assume HI: "todos P (x @ y) = (todos P x \<and> todos P y)"
+  have "todos P ((a#x) @ y) = (P a \<and> (todos P (x @ y)))" by simp
+  also have "... = (P a \<and> (todos P x \<and> todos P y))" using HI by simp
+  finally show "todos P ((a # x) @ y) = (todos P (a # x) \<and> todos P y)" by simp
+qed
 
 text {*
   --------------------------------------------------------------------- 
