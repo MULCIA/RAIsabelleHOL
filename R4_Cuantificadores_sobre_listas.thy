@@ -244,7 +244,8 @@ text {*
 *}
 
 fun estaEn :: "'a \<Rightarrow> 'a list \<Rightarrow> bool" where
-  "estaEn x xs = undefined"
+  "estaEn x [] = False"
+| "estaEn x (a#xs) = ((a = x) \<or> (estaEn x xs))"
 
 text {*
   --------------------------------------------------------------------- 
