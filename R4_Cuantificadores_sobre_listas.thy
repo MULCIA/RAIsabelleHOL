@@ -118,7 +118,18 @@ text {*
 *}
 
 lemma "todos P (rev xs) = todos P xs"
-oops
+proof (induct xs)
+show "todos P (rev []) = todos P []" by simp
+next
+fix a xs
+  assume HI: "todos P (rev xs) = todos P xs"
+  have "todos P (rev (a # xs)) = (todos P ((rev xs)@[a]))" by simp
+  also have "... = (todos P (rev xs) \<and> todos P [a])" by (simp add:todos_append)
+  also have "... = (todos P xs \<and> P a)" using HI by simp
+  also have "... = (P a \<and> todos P xs)" by arith
+  also have "... = (todos P (a#xs))" by simp
+  finally show "todos P (rev (a # xs)) = (todos P (a#xs))" by simp    
+qed
 
 text {*
   --------------------------------------------------------------------- 
@@ -128,6 +139,7 @@ text {*
 *}
 
 lemma "algunos (\<lambda>x. P x \<and> Q x) xs = (algunos P xs \<and> algunos Q xs)"
+quickcheck
 oops
 
 text {*
