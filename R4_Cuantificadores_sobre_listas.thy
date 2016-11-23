@@ -268,7 +268,7 @@ text {*
 *}
 
 lemma "algunos P xs = (\<not> todos (\<lambda>x. (\<not> P x)) xs)"
-oops
+by (induct xs) auto
      
 text {*
   --------------------------------------------------------------------- 
@@ -278,7 +278,15 @@ text {*
 *}
 
 lemma "algunos P xs = (\<not> todos (\<lambda>x. (\<not> P x)) xs)"
-oops
+proof (induct xs)
+  show "algunos P [] = (\<not> todos (\<lambda>x. \<not> P x) [])" by simp
+next 
+  fix a xs
+  assume HI: "algunos P xs = (\<not> todos (\<lambda>x. \<not> P x) xs)"
+  have "algunos P (a # xs) = (P a \<or> (algunos P xs))" by simp
+  also have "... = (P a \<or> (\<not> todos (\<lambda>x. \<not> P x) xs))" using HI by simp
+  finally show "algunos P (a # xs) = (\<not> todos (\<lambda>x. \<not> P x) (a # xs))" by simp
+qed
      
 text {*
   --------------------------------------------------------------------- 
@@ -301,5 +309,19 @@ text {*
   Demostrar dicha relación de forma automática y detallada.
   --------------------------------------------------------------------- 
 *}
+
+lemma "estaEn a xs = algunos (\<lambda>x. x = a) xs"
+by (induct xs) auto
+
+lemma "estaEn x xs = (algunos (\<lambda>a. a=x) xs)" 
+proof (induct xs)
+  show " estaEn x [] = algunos (\<lambda>a. a = x) []" by simp
+next
+  fix a xs
+  assume HI: "estaEn x xs = algunos (\<lambda>a. a = x) xs"
+  have "estaEn x (a # xs) = (a = x \<or> estaEn x xs)" by simp
+  also have "... = (a = x \<or> algunos (\<lambda>a. a = x) xs)" using HI by simp
+  finally show " estaEn x (a # xs) = algunos (\<lambda>a. a = x) (a # xs)" by simp
+qed
 
 end
