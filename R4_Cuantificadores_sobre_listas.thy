@@ -223,7 +223,17 @@ text {*
 *}
 
 lemma "algunos P (rev xs) = algunos P xs"
-oops
+proof (induct xs)
+  show "algunos P (rev []) = algunos P []" by simp
+next
+  fix a xs
+  assume HI:"algunos P (rev xs) = algunos P xs"
+  have "algunos P (rev (a # xs)) = algunos P ((rev xs) @ [a])" by simp
+  also have "... = ((algunos P (rev xs)) \<or> (algunos P [a]))" by (simp add: algunos_append)
+  also have "... = ((algunos P xs) \<or> (algunos P [a]))" using HI by simp
+  also have "... = ((algunos P [a]) \<or> (algunos P xs))" by arith
+  finally show "algunos P (rev (a # xs)) = algunos P (a # xs)" by simp
+qed
 
 text {*
   --------------------------------------------------------------------- 
@@ -233,6 +243,22 @@ text {*
   y demostrar la equivalencia de forma automática y detallada.
   --------------------------------------------------------------------- 
 *}
+
+lemma "algunos (\<lambda>x. P x \<or> Q x) xs = (algunos P xs \<or> algunos Q xs)"
+by (induct xs) auto
+
+lemma "algunos (\<lambda>x. P x \<or> Q x) xs = (algunos P xs \<or> algunos Q xs) "
+proof (induct xs)
+  show "algunos (\<lambda>x. P x \<or> Q x) [] = (algunos P [] \<or> algunos Q []) " by simp
+next
+  fix a xs
+  assume HI: " algunos (\<lambda>x. P x \<or> Q x) xs = (algunos P xs \<or> algunos Q xs)"
+  have " algunos (\<lambda>x. P x \<or> Q x) (a # xs) = ( P a \<or> Q a \<or> algunos (\<lambda>x. P x \<or> Q x) xs)" by simp
+  also have "... = (P a \<or> Q a \<or> (algunos P xs \<or> algunos Q xs))" using HI by simp
+  also have "\<dots> = (((P a) \<or> algunos P xs) \<or> ((Q a) \<or> algunos Q xs))" by arith 
+  also have "\<dots> = (algunos P (a#xs) \<or> algunos Q (a#xs))" by simp
+  finally show "algunos (\<lambda>x. P x \<or> Q x) (a # xs) = (algunos P (a # xs) \<or> algunos Q (a # xs)) " by simp
+qed
 
 text {*
   --------------------------------------------------------------------- 
