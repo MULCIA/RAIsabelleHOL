@@ -209,7 +209,11 @@ text {*
 *}
 
 lemma "algunos P (rev xs) = algunos P xs"
-oops
+apply (induct xs)
+apply simp
+apply (simp add: algunos_append)
+apply auto
+done
 
 text {*
   --------------------------------------------------------------------- 
