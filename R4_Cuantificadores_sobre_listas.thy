@@ -150,7 +150,9 @@ text {*
 *}
 
 lemma "algunos P (map f xs) = algunos (P o f) xs"
-oops
+apply (induct xs)
+apply auto
+done
 
 text {*
   --------------------------------------------------------------------- 
