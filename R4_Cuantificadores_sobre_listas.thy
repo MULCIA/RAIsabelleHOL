@@ -190,9 +190,16 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-lemma algunos_append:
-  "algunos P (xs @ ys) = (algunos P xs \<or> algunos P ys)"
-oops
+lemma algunos_append: "algunos P (xs @ ys) = (algunos P xs \<or> algunos P ys)"
+proof (induct xs)
+  show "algunos P ([] @ ys) = (algunos P [] \<or> algunos P ys)" by simp
+next 
+  fix a xs
+  assume HI: "algunos P (xs @ ys) = (algunos P xs \<or> algunos P ys)"
+  have "algunos P ((a # xs) @ ys) = (P a \<or> (algunos P (xs @ ys)))" by simp
+  also have "... = (P a \<or> (algunos P xs \<or> algunos P ys))" using HI by simp
+  finally show "algunos P ((a # xs) @ ys) = (algunos P (a # xs) \<or> algunos P ys)" by simp
+qed
 
 text {*
   --------------------------------------------------------------------- 
