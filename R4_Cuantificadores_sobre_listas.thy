@@ -162,7 +162,16 @@ text {*
 *}
 
 lemma "algunos P (map f xs) = algunos (P o f) xs"
-oops
+proof (induct xs)
+  show "algunos P (map f []) = algunos (P \<circ> f) []"  by simp
+next
+  fix a xs
+  assume H1: "algunos P (map f xs) = algunos (P \<circ> f) xs"
+  have  "algunos P (map f (a # xs)) = (algunos P (map f [a]) \<or> algunos P (map f xs))" by simp
+  also have "\<dots> = (algunos (P \<circ> f) [a] \<or>  algunos (P \<circ> f) xs )" using H1 by simp
+  also have "\<dots> = algunos (P \<circ> f) (a#xs)" by simp
+  finally show "algunos P (map f (a # xs)) = algunos (P \<circ> f) (a#xs)" by simp
+qed
 
 text {*
   --------------------------------------------------------------------- 
