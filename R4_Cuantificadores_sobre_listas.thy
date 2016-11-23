@@ -181,7 +181,7 @@ text {*
 *}
 
 lemma "algunos P (xs @ ys) = (algunos P xs \<or> algunos P ys)"
-oops
+by (induct xs) auto
 
 text {*
   --------------------------------------------------------------------- 
