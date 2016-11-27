@@ -93,7 +93,7 @@ text {*
 -- "La demostración automática es"
 lemma estaEn_borraDuplicados: 
   "estaEn a (borraDuplicados xs) = estaEn a xs"
-oops
+by (induct xs) auto
 
 text {*
   --------------------------------------------------------------------- 
