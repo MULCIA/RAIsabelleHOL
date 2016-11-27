@@ -69,7 +69,7 @@ text {*
 -- "La demostración automática es"
 lemma length_borraDuplicados:
   "length (borraDuplicados xs) \<le> length xs"
-oops
+by (induct xs) auto
 
 text {*
   --------------------------------------------------------------------- 
