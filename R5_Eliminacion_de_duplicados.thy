@@ -54,7 +54,8 @@ text {*
 *}
 
 fun borraDuplicados :: "'a list \<Rightarrow> 'a list" where
-  "borraDuplicados xs = undefined"
+  "borraDuplicados[] = []"
+| "borraDuplicados (x#xs) = (if estaEn x xs then borraDuplicados xs  else x # borraDuplicados xs)"
 
 value "borraDuplicados [1::nat,2,4,2,3] = [1,4,2,3]"
 
