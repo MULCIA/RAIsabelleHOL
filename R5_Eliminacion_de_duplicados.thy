@@ -34,7 +34,8 @@ text {*
 *}
 
 fun sinDuplicados :: "'a list \<Rightarrow> bool" where
-  "sinDuplicados xs = undefined"
+  "sinDuplicados [] = True"
+| "sinDuplicados (x#xs) = (\<not>estaEn x xs \<and> sinDuplicados xs)"
 
 value "sinDuplicados [1::nat,4,2]   = True"
 value "sinDuplicados [1::nat,4,2,4] = False"
