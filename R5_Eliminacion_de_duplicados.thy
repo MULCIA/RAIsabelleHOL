@@ -16,7 +16,8 @@ text {*
 *}
 
 fun estaEn :: "'a \<Rightarrow> 'a list \<Rightarrow> bool" where
-  "estaEn x xs = undefined"
+  "estaEn _ [] = False"
+| "estaEn x (y#xs) = ((x = y) \<or> (estaEn x xs))"
 
 value "estaEn (2::nat) [3,2,4] = True"
 value "estaEn (1::nat) [3,2,4] = False"
