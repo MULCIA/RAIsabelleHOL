@@ -121,7 +121,7 @@ text {*
 -- "La demostración automática"
 lemma sinDuplicados_borraDuplicados:
   "sinDuplicados (borraDuplicados xs)"
-oops
+by (induct xs) (auto simp add: estaEn_borraDuplicados)
 
 text {*
   --------------------------------------------------------------------- 
