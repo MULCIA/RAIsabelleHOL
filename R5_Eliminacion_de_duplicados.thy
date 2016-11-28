@@ -79,9 +79,18 @@ text {*
 *}
 
 -- "La demostración estructurada es"
-lemma length_borraDuplicados_2: 
-  "length (borraDuplicados xs) \<le> length xs"
-oops
+
+lemma length_borraDuplicados_2: "length (borraDuplicados xs) \<le> length xs" (is "?P xs")
+proof (induct xs)
+  show "?P []" by simp
+next 
+  fix a xs
+  assume HI: "?P xs"
+  have "length (borraDuplicados (a # xs)) \<le> 1+length (borraDuplicados xs)" by simp
+  also have "... \<le> 1+length xs" using HI by simp
+  finally show "length (borraDuplicados (a # xs)) \<le> length (a # xs)" by simp
+qed
+
 
 text {*
   --------------------------------------------------------------------- 
