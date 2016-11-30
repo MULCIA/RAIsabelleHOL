@@ -174,4 +174,8 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
+lemma "borraDuplicados (rev xs) = rev (borraDuplicados xs)"
+quickcheck
+oops
+
 end
