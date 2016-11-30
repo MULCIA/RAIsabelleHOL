@@ -152,7 +152,20 @@ text {*
 -- "La demostración estructurada es"
 lemma sinDuplicados_borraDuplicados_2:
   "sinDuplicados (borraDuplicados xs)"
-oops
+proof (induct xs)
+  show "sinDuplicados (borraDuplicados [])" by simp
+next
+  fix x xs
+  assume HI: "sinDuplicados (borraDuplicados xs)"
+  show "sinDuplicados (borraDuplicados (x # xs))" 
+  proof (cases)
+    assume "estaEn x xs" 
+    then show "sinDuplicados (borraDuplicados (x # xs))" using HI by simp
+  next
+    assume "\<not>(estaEn x xs)"
+    then show "sinDuplicados (borraDuplicados (x # xs))" using HI by (simp add: estaEn_borraDuplicados)
+  qed
+qed
 
 text {*
   --------------------------------------------------------------------- 
