@@ -88,7 +88,7 @@ next
   assume HI: "?P xs"
   have "length (borraDuplicados (a # xs)) \<le> 1+length (borraDuplicados xs)" by simp
   also have "... \<le> 1+length xs" using HI by simp
-  finally show "length (borraDuplicados (a # xs)) \<le> length (a # xs)" by simp
+  finally show "?P (a # xs)" by simp
 qed
 
 
@@ -116,9 +116,19 @@ text {*
 *}
 
 -- "La demostración estructurada es"
-lemma estaEn_borraDuplicados_2: 
-  "estaEn a (borraDuplicados xs) = estaEn a xs"
+lemma estaEn_borraDuplicados_2: "estaEn a (borraDuplicados xs) = estaEn a xs" (is "?P a xs")
+proof (induct xs)
+  show "?P a []" by simp
+next 
+  fix b xs
+  assume HI: "?P a xs"
+  show "?P a (b#xs)"
+  proof (rule iffI)
+    assume HII: "?P a (b#xs)"
 oops
+    
+    
+  
 
 text {*
   --------------------------------------------------------------------- 
