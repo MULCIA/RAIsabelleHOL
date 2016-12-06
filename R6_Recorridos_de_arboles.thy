@@ -283,8 +283,19 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-theorem "hd (preOrden a) = raiz a"
-oops
+theorem "hd (preOrden a) = raiz a" (is "?P a")
+proof (induct a) 
+  fix t
+  show "?P (H t)" by simp
+next
+  fix t i d
+  assume H1: " ?P i"
+  assume H2: " ?P d"
+  have " hd (preOrden (N t i d)) = hd ([t] @ preOrden i @ preOrden d) " by simp
+  also have "... = t" by simp
+  also have "... = raiz (N t i d)" by simp
+  finally show " ?P (N t i d)" by simp
+qed
 
 text {*  
   --------------------------------------------------------------------- 
