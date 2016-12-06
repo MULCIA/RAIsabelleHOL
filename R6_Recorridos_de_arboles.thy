@@ -122,8 +122,19 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-lemma "postOrden (espejo a) = rev (preOrden a)"
-oops
+lemma "postOrden (espejo a) = rev (preOrden a)" (is "?P a")
+proof (induct a)
+  fix x 
+  show "?P (H x)" by simp 
+next
+  fix x 
+  fix i assume h1: "?P i"
+  fix d assume h2: "?P d"
+  have "postOrden (espejo (N x i d)) = postOrden (N x (espejo d) (espejo i))" by simp
+  also have "... = (postOrden (espejo d)) @ (postOrden (espejo i)) @ [x]" by simp
+  also have "... = rev (preOrden d) @ rev (preOrden i) @ [x]" using h1 h2 by simp 
+  finally show "?P (N x i d)" by simp
+qed
 
 text {*  
   --------------------------------------------------------------------- 
