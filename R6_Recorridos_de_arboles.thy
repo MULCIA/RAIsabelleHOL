@@ -71,7 +71,8 @@ text {*
 *}
 
 fun inOrden :: "'a arbol \<Rightarrow> 'a list" where
-  "inOrden t = undefined"
+  "inOrden (H t) = [t]"
+| "inOrden (N t i d) = (inOrden i) @ [t] @ (inOrden d)"
 
 value "inOrden (N e (N c (H a) (H d)) (N g (H f) (H h)))
        = [a,c,d,e,f,g,h]"
