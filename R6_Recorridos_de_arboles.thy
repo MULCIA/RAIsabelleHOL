@@ -211,8 +211,27 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-theorem "last (inOrden a) = extremo_derecha a"
-oops
+lemma aux_ej12: "inOrden a \<noteq> []"
+apply (induct a) 
+apply simp
+apply simp
+done
+
+theorem "last (inOrden a) = extremo_derecha a" (is "?P a")
+proof (induct a)
+  fix t
+  show "?P (H t)" by simp
+next
+  fix t i d 
+  assume H1: "?P i"
+  assume H2: "?P d"
+  have "last (inOrden (N t i d)) = last (inOrden i @ [t] @ inOrden d)" 
+    by (simp only: inOrden.simps(2))
+  also have "\<dots> = last (inOrden d)" by (simp add: aux_ej12)
+  also have "\<dots> = extremo_derecha d" using H2 by simp
+  also have "\<dots> = extremo_derecha (N t i d)" by simp
+  finally show "?P (N t i d)" by simp
+qed
 
 text {*  
   --------------------------------------------------------------------- 
