@@ -167,7 +167,8 @@ text {*
 *}
 
 fun raiz :: "'a arbol \<Rightarrow> 'a" where
-  "raiz t = undefined"
+  "raiz (H x) = x"
+| "raiz (N x i d) = x"
 
 value "raiz (N e (N c (H a) (H d)) (N g (H f) (H h))) = e"
 
