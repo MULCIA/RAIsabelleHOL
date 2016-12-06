@@ -199,7 +199,8 @@ text {*
 *}
 
 fun extremo_derecha :: "'a arbol \<Rightarrow> 'a" where
-  "extremo_derecha t = undefined"
+  "extremo_derecha (H t) = t"
+| "extremo_derecha (N t i d) = extremo_derecha d"
 
 value "extremo_derecha (N e (N c (H a) (H d)) (N g (H f) (H h))) = h"
 
