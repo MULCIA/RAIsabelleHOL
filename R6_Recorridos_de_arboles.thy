@@ -143,8 +143,19 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-theorem "inOrden (espejo a) = rev (inOrden a)"
-oops
+theorem "inOrden (espejo a) = rev (inOrden a)" (is "?P a")
+proof (induct a)
+  fix x 
+  show "?P (H x)" by simp 
+next
+  fix x 
+  fix i assume h1: "?P i"
+  fix d assume h2: "?P d"
+  have "inOrden (espejo (N x i d)) = inOrden (N x (espejo d) (espejo i))" by simp
+  also have "... = (inOrden (espejo d)) @ [x] @ (inOrden (espejo i))" by simp
+  also have "... = rev (inOrden d) @ [x] @ rev (inOrden i)" using h1 h2 by simp 
+  finally show "?P (N x i d)" by simp
+qed
 
 text {*  
   --------------------------------------------------------------------- 
