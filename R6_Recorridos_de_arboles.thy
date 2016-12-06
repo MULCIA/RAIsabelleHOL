@@ -240,8 +240,21 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-theorem "hd (inOrden a) = extremo_izquierda a"
-oops
+theorem "hd (inOrden a) = extremo_izquierda a" (is "?P a")
+proof (induct a)
+  fix t
+  show "?P (H t)" by simp
+next
+  fix t i d 
+  assume H1: "?P i"
+  assume H2: "?P d"
+  have "hd (inOrden (N t i d)) = hd (inOrden i @ [t] @ inOrden d)" 
+    by (simp only: inOrden.simps(2))
+  also have "\<dots> = hd (inOrden i)" by (simp add: aux_ej12)
+  also have "\<dots> = extremo_izquierda i" using H1 by simp
+  also have "\<dots> = extremo_izquierda (N t i d)" by simp
+  finally show "?P (N t i d)" by simp
+qed
 
 text {*  
   --------------------------------------------------------------------- 
