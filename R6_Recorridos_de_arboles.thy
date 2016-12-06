@@ -263,8 +263,18 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
-theorem "hd (preOrden a) = last (postOrden a)"
-oops
+theorem "hd (preOrden a) = last (postOrden a)" (is "?P a")
+proof (induct a)
+  fix t 
+  show "?P (H t)" by simp 
+next
+  fix t 
+  fix i assume H1: "?P i"
+  fix d assume H2: "?P d"
+  have "hd (preOrden (N t i d)) = hd ([t] @ (preOrden i) @ (preOrden d))" by simp
+  also have "... = hd ([t])" by simp
+  finally show "hd (preOrden (N t i d)) = last (postOrden (N t i d))" by simp
+qed
 
 text {*  
   --------------------------------------------------------------------- 
