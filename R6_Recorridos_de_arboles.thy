@@ -305,6 +305,7 @@ text {*
 *}
 
 theorem "hd (inOrden a) = raiz a"
+quickcheck
 oops
 
 text {*  
