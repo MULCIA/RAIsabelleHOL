@@ -88,7 +88,8 @@ text {*
 *}
 
 fun espejo :: "'a arbol \<Rightarrow> 'a arbol" where
-  "espejo t = undefined"
+  "espejo (H t) = H t"
+| "espejo (N t i d) = N t (espejo d) (espejo i)"
 
 value "espejo (N e (N c (H a) (H d)) (N g (H f) (H h))) 
        = N e (N g (H h) (H f)) (N c (H d) (H a))"
