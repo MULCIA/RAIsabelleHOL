@@ -53,7 +53,8 @@ text {*
 *}
 
 fun postOrden :: "'a arbol \<Rightarrow> 'a list" where
-  "postOrden t = undefined"
+  "postOrden (H t) = [t]"
+| "postOrden (N t i d) = (postOrden i) @ (postOrden d) @ [t]"
 
 value "postOrden (N e (N c (H a) (H d)) (N g (H f) (H h)))
        = [a,d,c,f,h,g,e]"
