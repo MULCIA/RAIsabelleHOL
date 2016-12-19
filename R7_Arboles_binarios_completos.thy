@@ -159,6 +159,9 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
+lemma lej10:  "es_abc profundidad (abc n)"
+by (induct n) auto
+
 text {*  
   --------------------------------------------------------------------- 
   Ejercicio 11. Demostrar que si a es un árbolo binario completo
