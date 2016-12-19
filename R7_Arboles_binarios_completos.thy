@@ -53,7 +53,8 @@ text {*
 *}
 
 fun profundidad :: "arbol => nat" where
-  "profundidad t = undefined"
+  "profundidad H = 0"
+| "profundidad (N i d) = 1 + (max (profundidad i)(profundidad d))"
 
 value "profundidad (N (N H H) (N H H)) = 2"
 
