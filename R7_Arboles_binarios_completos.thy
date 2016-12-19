@@ -131,6 +131,12 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
+lemma arbol_completo_respecto_num_hojas:
+  assumes "es_abc hojas n"
+  shows "Suc(size n) = hojas n"
+using assms
+by (induct n) auto
+
 text {*  
   --------------------------------------------------------------------- 
   Ejercicio 9. Demostrar que un árbol binario a es completo respecto de
