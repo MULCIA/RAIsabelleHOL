@@ -170,6 +170,12 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
+lemma lej11: 
+  assumes " es_abc profundidad n"
+  shows "n = (abc (profundidad n))"
+using assms
+by (induct n) auto
+
 text {*  
   --------------------------------------------------------------------- 
   Ejercicio 12. Encontrar una medida f tal que (es_abc f) es distinto de 
