@@ -118,6 +118,12 @@ text {*
   --------------------------------------------------------------------- 
 *}
 
+lemma arbol_profundidad_respecto_num_hojas:
+  assumes "es_abc profundidad n"
+  shows "hojas n = 2^(profundidad n)"
+using assms
+by (induct n) auto
+
 text {*  
   --------------------------------------------------------------------- 
   Ejercicio 8. Demostrar que un árbol binario a es completo respecto del
