@@ -69,7 +69,8 @@ text {*
 *}
 
 fun abc :: "nat \<Rightarrow> arbol" where
-  "abc 0 = undefined"
+  "abc 0 = H"
+| "abc (Suc n) = (N (abc n) (abc n))"
 
 value "abc 3 = N (N (N H H) (N H H)) (N (N H H) (N H H))"
 
