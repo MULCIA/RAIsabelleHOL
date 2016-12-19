@@ -140,6 +140,9 @@ lemma arbol_completo_respecto_num_hojas:
 using assms
 by (induct n) auto
 
+lemma lej8: "es_abc hojas a = es_abc size a"
+by (induct a) (auto simp add:arbol_completo_respecto_num_hojas [symmetric])
+
 text {*  
   --------------------------------------------------------------------- 
   Ejercicio 9. Demostrar que un árbol binario a es completo respecto de
@@ -148,7 +151,7 @@ text {*
 *}
 
 lemma arbol_completo_respecto_profundidad: "es_abc profundidad n = es_abc size n"
-by (simp add: arbol_profundidad_respecto_num_hojas arbol_completo_respecto_num_hojas) 
+by (simp add: lej7 lej8) 
 
 text {*  
   --------------------------------------------------------------------- 
