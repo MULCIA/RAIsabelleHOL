@@ -89,7 +89,8 @@ text {*
 *}
 
 fun es_abc :: "(arbol => 'a) => arbol => bool" where
-  "es_abc f t = undefined"
+  "es_abc _ H = True"
+|  "es_abc f (N i d) = (es_abc f i \<and> es_abc f d \<and> (f i = f d))"
 
 text {*  
   --------------------------------------------------------------------- 
