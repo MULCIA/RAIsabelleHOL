@@ -38,7 +38,8 @@ text {*
 *}
 
 fun hojas :: "arbol => nat" where
-  "hojas t = undefined"
+  "hojas H = 1"
+| "hojas (N i d) = hojas i + hojas d"
 
 value "hojas (N (N H H) (N H H)) = 4"
 
