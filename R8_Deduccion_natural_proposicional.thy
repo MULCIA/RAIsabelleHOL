@@ -60,6 +60,24 @@ text {* ---------------------------------------------------------------
      \<not>q \<longrightarrow> \<not>p \<turnstile> p \<longrightarrow> q
   ------------------------------------------------------------------ *}
  
+lemma ejercicio_1:
+  assumes 1: "\<not>q \<longrightarrow> \<not>p"
+  shows "p \<longrightarrow> q"
+proof -
+  {assume 2: "p"
+   then have 3: "\<not>\<not>p" by (rule notnotI)
+   have 4: "\<not>\<not>q" using 1 3 by (rule mt)
+   then have 5: "q" by (rule notnotD)} 
+  then show "p \<longrightarrow> q" by (rule impI)
+qed
+
+lemma ejercicio_1_2:
+  assumes 1: "\<not>q \<longrightarrow> \<not>p"
+             "p"
+  shows "p \<longrightarrow> q"
+using assms
+by auto
+
 text {* --------------------------------------------------------------- 
   Ejercicio 2. Demostrar
      \<not>(\<not>p \<and> \<not>q) \<turnstile> p \<or> q
