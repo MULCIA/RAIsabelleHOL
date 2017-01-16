@@ -89,8 +89,8 @@ lemma ejercicio_2:
 proof -
   {assume 2: "(\<not>p \<and> \<not>q)"
    have 3: "p" using 1 2 by (rule notE)
-   then have "p \<or> q" by (rule disjI1)}
-   thus "p \<or> q" by auto
+   then have 4: "p \<or> q" by (rule disjI1)}
+   then show "p \<or> q" by auto
 qed
 
 lemma ejercicio_2_2:
@@ -105,7 +105,7 @@ text {* ---------------------------------------------------------------
   Ejercicio 3. Demostrar
      \<not>(\<not>p \<or> \<not>q) \<turnstile> p \<and> q
   ------------------------------------------------------------------ *}
- 
+
 text {* --------------------------------------------------------------- 
   Ejercicio 4. Demostrar
      \<not>(p \<and> q) \<turnstile> \<not>p \<or> \<not>q
