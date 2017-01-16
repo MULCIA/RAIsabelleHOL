@@ -149,4 +149,18 @@ text {* ---------------------------------------------------------------
      \<turnstile> (p \<longrightarrow> q) \<or> (q \<longrightarrow> p)
   ------------------------------------------------------------------ *}
  
+lemma ejercicio_5:
+  assumes 1: "q"
+  shows "(p \<longrightarrow> q) \<or> (q \<longrightarrow> p)" 
+proof -
+  have 2: "(p \<longrightarrow>q)" using 1 by (rule impI)
+  show "(p \<longrightarrow> q) \<or> (q \<longrightarrow> p)" using 2 by (rule disjI1) 
+qed
+
+lemma ejercicio_5_2:
+  assumes "q"
+  shows "(p \<longrightarrow> q) \<or> (q \<longrightarrow> p)" 
+using assms
+by auto
+
 end
