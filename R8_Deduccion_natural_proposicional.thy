@@ -72,8 +72,8 @@ proof -
 qed
 
 lemma ejercicio_1_2:
-  assumes 1: "\<not>q \<longrightarrow> \<not>p"
-             "p"
+  assumes "\<not>q \<longrightarrow> \<not>p"
+          "p"
   shows "p \<longrightarrow> q"
 using assms
 by auto
@@ -82,7 +82,7 @@ text {* ---------------------------------------------------------------
   Ejercicio 2. Demostrar
      \<not>(\<not>p \<and> \<not>q) \<turnstile> p \<or> q
   ------------------------------------------------------------------ *}
- 
+
 text {* --------------------------------------------------------------- 
   Ejercicio 3. Demostrar
      \<not>(\<not>p \<or> \<not>q) \<turnstile> p \<and> q
