@@ -106,6 +106,23 @@ text {* ---------------------------------------------------------------
      \<not>(\<not>p \<or> \<not>q) \<turnstile> p \<and> q
   ------------------------------------------------------------------ *}
 
+lemma ejercicio_3:
+  assumes 1: "\<not>(\<not>p \<or> \<not>q)" and
+          2: "(\<not>p \<or> \<not>q)"
+  shows "p \<and> q"
+proof -
+   have 3: "p" using 1 2 by (rule notE)
+   have 4: "q" using 1 2 by (rule notE)
+   show "p \<and> q" using 3 4 by (rule conjI)
+qed
+
+lemma ejercicio_3_2:
+  assumes "\<not>(\<not>p \<or> \<not>q)" and
+          "(\<not>p \<or> \<not>q)"
+  shows "p \<and> q"
+using assms
+by auto
+
 text {* --------------------------------------------------------------- 
   Ejercicio 4. Demostrar
      \<not>(p \<and> q) \<turnstile> \<not>p \<or> \<not>q
