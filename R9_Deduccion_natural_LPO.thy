@@ -134,4 +134,16 @@ text {* ---------------------------------------------------------------
      \<turnstile> \<exists>z. Qa z \<and> Q z (s (s a))
   ------------------------------------------------------------------ *}
  
+lemma ejercicio_5:
+  assumes 1: "\<forall>y. Q a y" 
+  assumes 2: "\<forall>x y. Q x y \<longrightarrow> Q (s x) (s y)"
+  shows "\<exists>z. Q a z \<and> Q z (s (s a))"
+proof 
+have "\<forall>y. Q a y \<longrightarrow> Q (s a) (s y)" using 2 by (rule allE)
+hence 3: "Q a (s a) \<longrightarrow> Q (s a) (s (s a))" by (rule allE)
+have 4: "Q a (s a)" using 1 by (rule allE)
+have 5: "Q (s a) (s (s a))" using `Q a (s a) \<longrightarrow> Q (s a) (s (s a))` `Q a (s a)` by (rule mp)
+show "Q a (s a) \<and> Q (s a) (s (s a))" using `Q a (s a)` `Q (s a) (s (s a))` by (rule conjI)
+qed
+
 end
