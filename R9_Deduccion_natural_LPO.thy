@@ -100,7 +100,13 @@ text {* ---------------------------------------------------------------
   Ejercicio 3. Demostrar o refutar
        (\<forall>x. \<exists>y. P x y) \<longrightarrow> (\<exists>y. \<forall>x. P x y)
   ------------------------------------------------------------------ *}
- 
+
+lemma ejercicio_3: 
+  assumes 1:  "(\<forall>x. \<exists>y. P x y)"
+  shows   "(\<exists>y. \<forall>x. P x y)"
+  quickcheck
+oops  
+
 text {* --------------------------------------------------------------- 
   Ejercicio 4. Demostrar o refutar
      {\<forall>x. P a x x, 
