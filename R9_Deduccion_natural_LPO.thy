@@ -73,6 +73,29 @@ text {* ---------------------------------------------------------------
        \<turnstile> \<forall>x y. R x y \<longrightarrow> \<not>(R y x)
   ------------------------------------------------------------------ *}
  
+lemma ejercicio_2: 
+  assumes 1: "\<forall>x y z. R x y \<and> R y z \<longrightarrow> R x z"
+  assumes 2: "\<forall>x. \<not>(R x x)"
+  shows   "\<forall>x y. R x y \<longrightarrow> \<not>(R y x)"
+proof (rule allI)
+fix x
+show "\<forall>y. R x y \<longrightarrow> \<not>(R y x)" 
+ proof (rule allI) 
+  fix y
+  {assume 3: "R x y"
+   {assume 4: "R y x"
+    have 5: "R x y \<and> R y x" using 3 4 by (rule conjI)
+    also have 6: "\<forall> z1 z2. R x z1 \<and> R z1 z2 \<longrightarrow> R x z2" using 1 by (rule allE)
+    then have 7: "\<forall> z. R x y \<and> R y z \<longrightarrow> R x z" by (rule allE)
+    then have 8: "R x y \<and> R y x \<longrightarrow> R x x" by (rule allE)
+    then have 9: "R x x" using 5 by (rule mp)
+    have 10: "\<not>(R x x)" using 2 by (rule allE)
+    then have 11: "False" using 9 by (rule notE)}
+  then have 12: "\<not> (R y x)" by (rule notI)}
+  thus "R x y \<longrightarrow> \<not>(R y x)" by (rule impI)
+ qed
+qed
+
 text {* --------------------------------------------------------------- 
   Ejercicio 3. Demostrar o refutar
        (\<forall>x. \<exists>y. P x y) \<longrightarrow> (\<exists>y. \<forall>x. P x y)
