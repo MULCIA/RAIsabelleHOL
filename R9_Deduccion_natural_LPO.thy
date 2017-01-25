@@ -114,6 +114,19 @@ text {* ---------------------------------------------------------------
      \<turnstile> \<exists>z. P (f a) z (f (f a))
   ------------------------------------------------------------------ *}
  
+lemma ejercicio_4: 
+  fixes P :: "'b \<Rightarrow> 'b \<Rightarrow> 'b \<Rightarrow> bool" 
+  assumes 1: "\<forall>x. P a x x"
+  assumes 2: "\<forall>x y z.  P x y z \<longrightarrow> P (f x) y (f z)"
+  shows   " \<exists>z. P (f a) z (f (f a))"
+proof (rule exI)
+ have 3: "P a (f a) (f a)" using 1 by (rule allE)
+ have 4: "\<forall>y z.  P a y z \<longrightarrow> P (f a) y (f z)" using 2 by (rule allE)
+ then have 5: "\<forall>z.  P a (f a) z \<longrightarrow> P (f a) (f a) (f z)" by (rule allE)
+ then have 6: "P a (f a) (f a) \<longrightarrow> P (f a) (f a) (f (f a))" by (rule allE)
+ then show "P (f a) (f a) (f (f a))" using 3 by (rule mp)
+qed
+
 text {* --------------------------------------------------------------- 
   Ejercicio 5. Demostrar o refutar
      {\<forall>y. Q a y, 
