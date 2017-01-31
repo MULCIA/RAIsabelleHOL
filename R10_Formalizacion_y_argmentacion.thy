@@ -103,6 +103,12 @@ text {* ---------------------------------------------------------------
        T(x) para x es trabajador
   ------------------------------------------------------------------ *}
 
+lemma ejercicio_2:
+  assumes "(\<exists>x. I(x)) \<and> (\<exists>x. T(x))"
+  shows   "\<exists>x. (I(x) \<and> T(x))"
+  quickcheck
+oops
+
 text {* --------------------------------------------------------------- 
   Ejercicio 3. Formalizar, y decidir la corrección, del siguiente
   argumento 
