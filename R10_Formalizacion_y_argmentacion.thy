@@ -103,7 +103,7 @@ text {* ---------------------------------------------------------------
        T(x) para x es trabajador
   ------------------------------------------------------------------ *}
 
-lemma ejercicio_2:
+lemma ejer_2:
   assumes "(\<exists>x. I(x)) \<and> (\<exists>x. T(x))"
   shows   "\<exists>x. (I(x) \<and> T(x))"
   quickcheck
@@ -120,6 +120,19 @@ text {* ---------------------------------------------------------------
        l      para Luis
        c      para Carlos
   ------------------------------------------------------------------ *}
+
+lemma ejer_3:
+  assumes 1: "\<forall>x y. P(x,y) \<longrightarrow> (\<forall>z. (H(z,y) \<longrightarrow> P(x,z)))" 
+  assumes 2: "H(j,l)"
+  assumes 3: "P(c,l)"
+  shows "P(c,j)"
+proof -
+  have 4 : "\<forall>y. P(c,y) \<longrightarrow> (\<forall>z. (H(z,y) \<longrightarrow> P(c,z)))" using 1 by (rule allE)
+  have 5 : "P(c,l) \<longrightarrow> (\<forall>z. (H(z,l) \<longrightarrow> P(c,z)))" using 4 by (rule allE)
+  then have 6 : "(\<forall>z. (H(z,l) \<longrightarrow> P(c,z)))" using 3 by (rule mp)
+  have 7 : "H(j,l) \<longrightarrow> P(c,j)" using 6 by (rule allE)
+  then show "P(c,j)" using 2 by (rule mp)
+qed 
 
 text {* --------------------------------------------------------------- 
   Ejercicio 4. Formalizar, y decidir la corrección, del siguiente
