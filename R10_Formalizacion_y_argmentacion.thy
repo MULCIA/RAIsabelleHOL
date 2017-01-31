@@ -181,11 +181,11 @@ text {* ---------------------------------------------------------------
   ------------------------------------------------------------------ *}
 
 lemma ejer_5:
-  assumes "e(h) = r" and
-          "h = m"
+  assumes 1: "e(h) = r"
+  assumes 2: "h = m"
   shows   "e(m) = r"
   proof -
-    show "e(m) = r" using assms(2) assms(1) by (rule subst)
+    show "e(m) = r" using 2 1 by (rule subst)
 qed
 
 end
