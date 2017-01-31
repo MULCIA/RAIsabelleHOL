@@ -148,6 +148,27 @@ text {* ---------------------------------------------------------------
        j       para Juanito
   ------------------------------------------------------------------ *}
 
+lemma ejer_4:
+  assumes 1: "\<forall>x y. Af(x) \<and> E(y) \<longrightarrow> Ap(x,y)"
+  assumes 2: "\<not>(\<exists>x. E(x) \<and> Ap(j,x))"
+  shows "(\<exists>x. E(x) \<and> N(x)) \<longrightarrow> \<not>Af(j)"  
+  proof (rule impI)
+  assume 3: "\<exists>x. E(x) \<and> N(x)"
+    then obtain a where 4: "E(a) \<and> N(a)" by (rule exE)
+    then have 5: "E(a)" by (rule conjunct1)
+    show 6: "\<not>Af(j)"
+    proof (rule notI)
+      assume 7: "Af(j)"
+      then have 8: "Af(j) \<and> E(a)" using 5 by (rule conjI)
+      have 9: "\<forall>y. Af(j) \<and> E(y) \<longrightarrow> Ap(j,y)" using 1 by (rule allE)
+      have 10: "Af(j) \<and> E(a) \<longrightarrow> Ap(j,a)" using 9 by (rule allE)
+      have 11: "Ap(j,a)" using 10 8 by (rule mp)
+      have 12: "E(a) \<and> Ap(j,a)" using 5 11 by (rule conjI)
+      have 13: "\<exists>x. E(x) \<and> Ap(j,x)" using 12 by (rule exI)
+      show "False" using 2 13 by (rule notE)
+    qed
+qed  
+
 text {* --------------------------------------------------------------- 
   Ejercicio 5. Formalizar, y decidir la corrección, del siguiente
   argumento 
@@ -158,5 +179,13 @@ text {* ---------------------------------------------------------------
        m    para María
        r    para Roberto
   ------------------------------------------------------------------ *}
+
+lemma ejer_5:
+  assumes "e(h) = r" and
+          "h = m"
+  shows   "e(m) = r"
+  proof -
+    show "e(m) = r" using assms(2) assms(1) by (rule subst)
+qed
 
 end
